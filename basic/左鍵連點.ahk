@@ -7,14 +7,8 @@ global toggle := false
 {
   global toggle := !toggle
   if(toggle) {
-    SetTimer () => MyLoop("{LButton}", 150), -1
+    SetTimer () => AutoLoop("{LButton}", 150), -1
   }
 }
 
 return
-MyLoop(button, interval) {
-  while toggle{
-    Click button
-    Sleep interval
-  }
-}

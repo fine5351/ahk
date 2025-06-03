@@ -28,7 +28,7 @@ MoveTo(x,y, wait:=100)
     Sleep(wait)
 }
 
-MyLoop(key, sleepTime:=100)
+AutoLoop(key, sleepTime:=100)
 {
     while toggle {
         Send(key)

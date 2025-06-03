@@ -11,15 +11,8 @@ global toggle := false
 
   global toggle := !toggle
   if(toggle) {
-    SetTimer () => MyLoop("f", 100), -1
+    SetTimer () => AutoLoop("f", 100), -1
   }
 }
 
 return
-
-MyLoop(key, interval) {
-  while toggle{
-    Send(key)
-    Sleep interval
-  }
-}
