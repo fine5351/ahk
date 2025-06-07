@@ -43,14 +43,18 @@ SearchAndClick(imagePath, x1:=0, y1:=0, x2:=A_ScreenWidth, y2:=A_ScreenHeight, w
     ; *TransN: 指定透明色
     ; *w: 指定寬度
     ; *h: 指定高度
-    if ImageSearch(&foundX, &foundY, x1, y1, x2, y2, "*10 *Trans0xFFFFFF " imagePath) {
-        ; 添加固定偏移量來點擊中心
-        ; 假設圖標大小約為 32x32 像素
-        centerX := foundX + 16
-        centerY := foundY + 16
-        
-        LeftClickAt(centerX, centerY, wait)
-        return true
+    startTime := A_TickCount
+    while (A_TickCount - startTime < 1000) {  ; 最多等待1秒
+        if ImageSearch(&foundX, &foundY, x1, y1, x2, y2, "*10 *Trans0xFFFFFF " imagePath) {
+            ; 添加固定偏移量來點擊中心
+            ; 假設圖標大小約為 32x32 像素
+            centerX := foundX + 16
+            centerY := foundY + 16
+            
+            LeftClickAt(centerX, centerY, wait)
+            return true
+        }
+        Sleep(50)  ; 每次搜尋間隔50毫秒
     }
     return false
 }
