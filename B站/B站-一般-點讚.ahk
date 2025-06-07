@@ -2,9 +2,9 @@
 #Include ../basic/Function.ahk
 
 ; 設定圖片目錄的絕對路徑
-imageDir := A_ScriptDir "\images-collection\"
+imageDir := A_ScriptDir "\images-normal\"
 
-^F1::
+F8::
 {
     ; 檢查是否在支援的瀏覽器中
     if(!WinActive("ahk_exe msedge.exe") and !WinActive("ahk_exe chrome.exe")) {
