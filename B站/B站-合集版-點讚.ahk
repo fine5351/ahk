@@ -74,11 +74,6 @@ imageDir := A_ScriptDir "\images"
         return
     }
     Sleep(250)
-
-    ; 7. 點擊關閉圖示
-    if(!SearchAndClick(imageDir "\close.png")) {
-        MsgBox "找不到關閉圖示`n請確認：`n1. 圖片是否清晰`n2. 圖片是否在正確位置`n3. 瀏覽器視窗是否在最前"
-        return
-    }
+    
 }
 
