@@ -11,7 +11,7 @@ global toggle := false
 
   global toggle := !toggle
   if(toggle) {
-    SetTimer () => AutoLoop("f", 100), -1
+    SetTimer () => AutoLoop("f", 100, &toggle), -1
   }
 }
 

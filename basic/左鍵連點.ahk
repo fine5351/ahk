@@ -7,7 +7,7 @@ global toggle := false
 {
   global toggle := !toggle
   if(toggle) {
-    SetTimer () => AutoLoop("{LButton}", 150), -1
+    SetTimer () => AutoLoop("{LButton}", 150, &toggle), -1
   }
 }
 
