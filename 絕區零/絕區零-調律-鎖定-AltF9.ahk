@@ -1,6 +1,6 @@
 #Include ../basic/Function.ahk
 
-^F9::
+!F9::
 {
     if(!WinActive("ahk_exe ZenlessZoneZero.exe")){
         return
