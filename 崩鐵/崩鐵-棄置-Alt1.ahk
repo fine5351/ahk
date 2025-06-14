@@ -1,9 +1,8 @@
 #Include ../basic/Function.ahk
 
-!D::
+!1::
 {
     if(!WinActive("ahk_exe StarRail.exe")){
-        MsgBox "非崩鐵視窗內"
         return
     }
     BlockInput(true)
