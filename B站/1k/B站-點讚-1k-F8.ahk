@@ -1,4 +1,4 @@
-#Include ../basic/Function.ahk
+#Include ../../basic/Function.ahk
 
 F8::
 {
@@ -19,7 +19,7 @@ F8::
     ;動態   
     LeftClickAt(402, 876, 1500)
     ;發布
-    LeftClickAt(1168, 715, 1500) 
+    LeftClickAt(1168, 725, 1500) 
     ;關閉
     LeftClickAt(976, 671)
 

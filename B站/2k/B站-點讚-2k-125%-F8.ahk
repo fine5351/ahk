@@ -1,4 +1,4 @@
-#Include ../basic/Function.ahk
+#Include ../../basic/Function.ahk
 
 F8::
 {
