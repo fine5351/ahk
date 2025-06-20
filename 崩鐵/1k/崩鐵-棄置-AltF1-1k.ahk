@@ -1,6 +1,6 @@
 #Include ../../basic/Function.ahk
 
-!1::
+!F1::
 {
     if(!WinActive("ahk_exe StarRail.exe")){
         return

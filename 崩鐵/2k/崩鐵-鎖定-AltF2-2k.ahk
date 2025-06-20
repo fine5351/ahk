@@ -1,15 +1,15 @@
 #Include ../../basic/Function.ahk
 
-!2::
+!F2::
 {
     if(!WinActive("ahk_exe StarRail.exe")){
         return
     }
     BlockInput(true)
-    LeftClickAt(459, 354, 150)
+    LeftClickAt(618, 472, 150)
 
     ;下一個
-    LeftClickAt(1612, 537, 150)
+    LeftClickAt(2152, 722, 150)
 
     BlockInput(false)
     return
