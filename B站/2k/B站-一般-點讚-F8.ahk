@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-#Include ../basic/Function.ahk
+#Include ../../basic/Function.ahk
 
 ; 設定圖片目錄的絕對路徑
 imageDir := A_ScriptDir "\images-normal\"

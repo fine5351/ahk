@@ -1,4 +1,4 @@
-#Include Functions.ahk
+#Include ../basic/Function.ahk
 
 F9::
 {

@@ -1,6 +1,6 @@
 #Include ../../basic/Function.ahk
 
-!F4::
++F6::
 {
     if(!WinActive("ahk_exe ZenlessZoneZero.exe")){
         return
@@ -12,13 +12,10 @@
     BlockInput(true)
 
     ;點擊棄置
-    LeftClickAt(727, 859, 150)
+    LeftClickAt(1134, 207, 150)
 
     BlockInput(false)
-
-    ; 取消 modal
-    LeftClickAt(1541, 365, 150)
-
+    
     ; 恢復鼠標位置
     MouseMove(mouseX, mouseY)
 
