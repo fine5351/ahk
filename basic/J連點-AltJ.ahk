@@ -3,9 +3,9 @@
 
 global toggle := false
 
-!j::
+^j::
 {
-  if( !WinActive("ahk_exe GenshinImpact.exe") and !WinActive("ahk_exe StarRail.exe") and !WinActive("ahk_exe ZenlessZoneZero.exe") ){
+  if( !WinActive("ahk_exe ZenlessZoneZero.exe") ){
     return
   }
 
