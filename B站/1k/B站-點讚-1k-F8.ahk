@@ -2,7 +2,7 @@
 
 F8::
 {
-    if(!WinActive("ahk_exe msedge.exe") && !WinActive("ahk_exe chrome.exe")){
+    if(!WinActive("ahk_exe comet.exe") && !WinActive("ahk_exe chrome.exe")){
         return
     }
 
