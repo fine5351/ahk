@@ -1,6 +1,6 @@
 #Include ../../basic/Function.ahk
 
-+F1::
++F5::
 {
     if(!WinActive("ahk_exe BH3.exe")){
         return
