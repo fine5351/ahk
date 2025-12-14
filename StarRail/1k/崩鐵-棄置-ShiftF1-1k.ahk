@@ -2,7 +2,7 @@
 
 +F1::
 {
-    if(!WinActive("ahk_exe StarRail.exe")){
+    if (!IsTargetGame()) {
         return
     }
     BlockInput(true)

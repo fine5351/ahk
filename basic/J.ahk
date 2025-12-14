@@ -5,14 +5,14 @@ global toggle := false
 
 ^j::
 {
-  if( !WinActive("ahk_exe ZenlessZoneZero.exe") ){
-    return
-  }
+    if (!IsTargetGame()) {
+        return
+    }
 
-  global toggle := !toggle
-  if(toggle) {
-    SetTimer () => AutoLoop("j", 100, &toggle), -1
-  }
+    global toggle := !toggle
+    if (toggle) {
+        SetTimer () => AutoLoop("j", 100, &toggle), -1
+    }
 }
 
 return

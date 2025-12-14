@@ -5,14 +5,14 @@ global toggle := false
 
 !f::
 {
-  if( !WinActive("ahk_exe GenshinImpact.exe") and !WinActive("ahk_exe StarRail.exe") ){
-    return
-  }
+    if (!IsTargetGame()) {
+        return
+    }
 
-  global toggle := !toggle
-  if(toggle) {
-    SetTimer () => AutoLoop("f", 100, &toggle), -1
-  }
+    global toggle := !toggle
+    if (toggle) {
+        SetTimer () => AutoLoop("f", 100, &toggle), -1
+    }
 }
 
 return

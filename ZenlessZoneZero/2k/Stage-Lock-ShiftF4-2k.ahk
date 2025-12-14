@@ -2,7 +2,7 @@
 
 +F4::
 {
-    if(!WinActive("ahk_exe ZenlessZoneZero.exe")){
+    if (!IsTargetGame()) {
         return
     }
     ; 記錄當前鼠標位置
@@ -17,9 +17,9 @@
 
     ; 取消 modal
     LeftClickAt(2045, 514, 150)
-    
+
     ; 恢復鼠標位置
     MouseMove(mouseX, mouseY)
-    
+
     return
 }

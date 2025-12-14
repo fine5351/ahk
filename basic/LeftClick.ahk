@@ -5,10 +5,14 @@ global toggle := false
 
 !l::
 {
-  global toggle := !toggle
-  if(toggle) {
-    SetTimer () => AutoLoop("{LButton}", 150, &toggle), -1
-  }
+    if (!IsTargetGame()) {
+        return
+    }
+
+    global toggle := !toggle
+    if (toggle) {
+        SetTimer () => AutoLoop("{LButton}", 150, &toggle), -1
+    }
 }
 
 return

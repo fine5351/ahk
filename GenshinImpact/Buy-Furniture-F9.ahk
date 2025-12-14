@@ -2,13 +2,12 @@
 
 F9::
 {
-    if(!WinActive("ahk_exe GenshinImpact.exe")){
+    if (!IsTargetGame()) {
         return
     }
     ; BlockInput(true)
 
-    loop 10 
-    {
+    loop 10 {
 
         ;物品
         LeftClickAt(1051, 242, 150)

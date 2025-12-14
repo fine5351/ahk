@@ -2,10 +2,10 @@
 
 +F4::
 {
-    if(!WinActive("ahk_exe ZenlessZoneZero.exe")){
+    if (!IsTargetGame()) {
         return
     }
-    
+
     ; 記錄當前鼠標位置
     MouseGetPos(&mouseX, &mouseY)
 

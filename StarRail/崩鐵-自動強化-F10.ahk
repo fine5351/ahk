@@ -1,7 +1,7 @@
 #Include ../basic/Function.ahk
 
-F10::{
-    if(!WinActive("ahk_exe StarRail.exe")){
+F10:: {
+    if (!IsTargetGame()) {
         return
     }
     BlockInput(true)
@@ -24,4 +24,4 @@ F10::{
 
     BlockInput(false)
     return
-}   
+}
