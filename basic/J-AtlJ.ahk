@@ -3,7 +3,7 @@
 
 global toggle := false
 
-^j::
+!j::
 {
     if (!IsTargetGame()) {
         return
@@ -11,8 +11,15 @@ global toggle := false
 
     global toggle := !toggle
     if (toggle) {
-        SetTimer () => AutoLoop("j", 100, &toggle), -1
+        SetTimer DoJClick, 100
+        DoJClick()
+    } else {
+        SetTimer DoJClick, 0
     }
+}
+
+DoJClick() {
+    Send("j")
 }
 
 return

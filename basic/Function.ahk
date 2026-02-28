@@ -35,13 +35,6 @@ MoveTo(x, y, wait := 100) {
     Sleep(wait)
 }
 
-AutoLoop(key, sleepTime := 100, &toggle := false) {
-    while toggle {
-        Send(key)
-        Sleep(sleepTime)
-    }
-}
-
 SearchAndClick(imagePath, x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight, wait := 100) {
     ; 使用更精確的搜尋選項
     ; *n: 容差值

@@ -11,8 +11,15 @@ global toggle := false
 
     global toggle := !toggle
     if (toggle) {
-        SetTimer () => AutoLoop("f", 100, &toggle), -1
+        SetTimer DoFClick, 100
+        DoFClick()
+    } else {
+        SetTimer DoFClick, 0
     }
+}
+
+DoFClick() {
+    Send("f")
 }
 
 return

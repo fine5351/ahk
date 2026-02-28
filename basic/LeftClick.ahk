@@ -7,8 +7,15 @@ global toggle := false
 {
     global toggle := !toggle
     if (toggle) {
-        SetTimer () => AutoLoop("{LButton}", 150, &toggle), -1
+        SetTimer DoLeftClick, 150
+        DoLeftClick()
+    } else {
+        SetTimer DoLeftClick, 0
     }
+}
+
+DoLeftClick() {
+    Send("{LButton}")
 }
 
 return
