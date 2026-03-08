@@ -10,3 +10,4 @@ Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\
 # Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\ZenlessZoneZero\2k\Stage-Lock-ShiftF4-2k.ahk" -Verb RunAs
 Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\basic\F-AltF.ahk" -Verb RunAs
 Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\basic\LeftClick.ahk" -Verb RunAs
+Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\chrome\mute.ahk" -Verb RunAs
