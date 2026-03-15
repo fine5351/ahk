@@ -10,4 +10,5 @@ Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\Honkai3rd\1k\Gui
 # Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\ZenlessZoneZero\1k\Stage-Lock-ShiftF4-1k.ahk" -Verb RunAs
 # Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\basic\F-AltF.ahk" -Verb RunAs
 # Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\basic\LeftClick.ahk" -Verb RunAs
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\chrome\mute.ahk" -Verb RunAs
+Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\chrome\mute-Alt1.ahk" -Verb RunAs
+Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\Honkai3rd\星芽-樂土-Atl1.ahk" -Verb RunAs
