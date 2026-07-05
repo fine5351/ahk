@@ -1,14 +1,9 @@
 #Requires AutoHotkey v2.0
 #Include Function.ahk
 
-; 核心修正：允許同一個快速鍵同時執行 2 個線程（1個負責開、1個負責關）
-#MaxThreadsPerHotkey 2
-
-global toggle := false
-
 $!f::
 {
-    global toggle
+    static toggle := false
     if (!toggle && !IsTargetGame()) {
         return
     }
@@ -20,10 +15,9 @@ $!f::
     } else {
         SetTimer DoFClick, 0
     }
+    KeyWait("f")
 }
 
 DoFClick() {
-    Send("{Blind}f")
-}
-
-return
+    SendEvent("{Blind}f")
+}
