@@ -3,6 +3,9 @@
 #     Exit
 # }
 
+# Stop currently running AutoHotkey scripts first
+Stop-Process -Name "AutoHotkey*" -Force -ErrorAction SilentlyContinue
+
 Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\Honkai3rd\1k\Guild-Contribution-ShiftF5-1k.ahk" -Verb RunAs
 # Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\StarRail\1k\Abandoned-ShiftF1-1k.ahk" -Verb RunAs
 # Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList ".\StarRail\1k\Lock-ShiftF2-1k.ahk" -Verb RunAs
