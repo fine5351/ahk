@@ -3,13 +3,15 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     Exit
 }
 
+Set-Location $PSScriptRoot
+
 # Stop currently running AutoHotkey scripts first
 Stop-Process -Name "AutoHotkey*" -Force -ErrorAction SilentlyContinue
 
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\StarRail\2k\Abandoned-ShiftF1-2k.ahk" -Verb RunAs
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\StarRail\2k\Lock-ShiftF2-2k.ahk" -Verb RunAs
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\ZenlessZoneZero\2k\Stage-Abandoned-ShiftF3-2k.ahk" -Verb RunAs
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\ZenlessZoneZero\2k\Stage-Lock-ShiftF4-2k.ahk" -Verb RunAs
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\basic\F-AltF.ahk" -Verb RunAs
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\basic\LeftClick.ahk" -Verb RunAs
-Start-Process ".\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\chrome\mute-Alt1.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\StarRail\2k\Abandoned-ShiftF1-2k.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\StarRail\2k\Lock-ShiftF2-2k.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\ZenlessZoneZero\2k\Stage-Abandoned-ShiftF3-2k.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\ZenlessZoneZero\2k\Stage-Lock-ShiftF4-2k.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\basic\F-AltF.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\basic\LeftClick.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\chrome\mute-Alt1.ahk" -Verb RunAs
