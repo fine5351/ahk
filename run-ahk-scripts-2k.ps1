@@ -10,6 +10,7 @@ Stop-Process -Name "AutoHotkey*" -Force -ErrorAction SilentlyContinue
 
 Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\StarRail\2k\Abandoned-ShiftF1-2k.ahk" -Verb RunAs
 Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\StarRail\2k\Lock-ShiftF2-2k.ahk" -Verb RunAs
+Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\StarRail\2k\Gacha-ShiftF5-2k.ahk" -Verb RunAs
 Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\ZenlessZoneZero\2k\Stage-Abandoned-ShiftF3-2k.ahk" -Verb RunAs
 Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\ZenlessZoneZero\2k\Stage-Lock-ShiftF4-2k.ahk" -Verb RunAs
 Start-Process "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe" -ArgumentList "D:\work\workspace\ahk\basic\F-AltF.ahk" -Verb RunAs
