@@ -1,0 +1,17 @@
+﻿=== 開始執行 AutoHotkey 單元測試 ===
+[PASS] TS-HP-01/02/03: 1440p 高度 (h=1440)
+[PASS] TS-HP-01-Ext: 4K 高度 (h=2160)
+[PASS] TS-HP-04: 1080p 高度 (h=1080)
+[PASS] TS-HP-04-Ext: 900p 高度 (h=900)
+[PASS] TS-BD-04: 21:9 2K 高度 (h=1440, 寬度 3440 不影響)
+[PASS] TS-BD-05: 21:9 1080p 高度 (h=1080, 寬度 2560 不會誤判為 2K)
+[PASS] TS-BD-Boundary: 臨界高度 1300 (2K 下限)
+[PASS] TS-BD-Boundary: 臨界高度 1299 (1K 上限)
+[PASS] TS-BD-Boundary: 臨界高度 800 (1K 下限)
+[PASS] TS-BD-Boundary: 臨界高度 799 (unknown 上限)
+[PASS] TS-EX-03: 極小視窗高度 600
+[PASS] TS-EX-03: 極小視窗高度 300
+[PASS] TS-BD-Fallback: 無效 Hwnd Fallback 至 A_ScreenHeight (1440 -> 2k)
+[PASS] TS-EX-01: 非目標遊戲視窗下 GetCurrentGame() 回傳空字串
+
+=== AutoHotkey 單元測試結束: 總計 14, 通過 14, 失敗 0 ===

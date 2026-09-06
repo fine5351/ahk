@@ -1,0 +1,152 @@
+﻿[
+    {
+        "Category":  "Syntax Validation",
+        "TestName":  "AHK v2 官方語法檢查: basic\\Function.ahk",
+        "Status":  "PASS",
+        "Detail":  "ExitCode: 0"
+    },
+    {
+        "Category":  "Syntax Validation",
+        "TestName":  "AHK v2 官方語法檢查: general\\Abandoned.ahk",
+        "Status":  "PASS",
+        "Detail":  "ExitCode: 0"
+    },
+    {
+        "Category":  "Syntax Validation",
+        "TestName":  "AHK v2 官方語法檢查: general\\Lock.ahk",
+        "Status":  "PASS",
+        "Detail":  "ExitCode: 0"
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: StarRail 1K Abandoned",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: StarRail 1K Lock",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: StarRail 2K Abandoned",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: StarRail 2K Lock",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: ZenlessZoneZero 1K Stage Abandoned",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: ZenlessZoneZero 1K Stage Lock",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: ZenlessZoneZero 2K Stage Abandoned",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: ZenlessZoneZero 2K Stage Lock",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: ZenlessZoneZero 2K Tuning Abandoned",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Coordinate Integrity",
+        "TestName":  "座標與延遲無損遷移: ZenlessZoneZero 2K Tuning Lock",
+        "Status":  "PASS",
+        "Detail":  ""
+    },
+    {
+        "Category":  "Exception Safety",
+        "TestName":  "try...finally 覆蓋率 (BlockInput) in general\\Abandoned.ahk",
+        "Status":  "PASS",
+        "Detail":  "BlockInput(true): 2, finally { BlockInput(false) }: 2"
+    },
+    {
+        "Category":  "Exception Safety",
+        "TestName":  "try...finally 覆蓋率 (BlockInput) in general\\Lock.ahk",
+        "Status":  "PASS",
+        "Detail":  "BlockInput(true): 2, finally { BlockInput(false) }: 2"
+    },
+    {
+        "Category":  "Key Pass-Through",
+        "TestName":  "#HotIf IsTargetGame() 條件式熱鍵規格 in general\\Abandoned.ahk",
+        "Status":  "PASS",
+        "Detail":  "HotIf Open: True, Close: True, All Inside: True"
+    },
+    {
+        "Category":  "Key Pass-Through",
+        "TestName":  "#HotIf IsTargetGame() 條件式熱鍵規格 in general\\Lock.ahk",
+        "Status":  "PASS",
+        "Detail":  "HotIf Open: True, Close: True, All Inside: True"
+    },
+    {
+        "Category":  "Simplicity \u0026 Stateless",
+        "TestName":  "無狀態設計檢驗 (無多餘全域狀態機) in general\\Abandoned.ahk",
+        "Status":  "PASS",
+        "Detail":  "純函式無副作用無全域狀態"
+    },
+    {
+        "Category":  "Simplicity \u0026 Stateless",
+        "TestName":  "無狀態設計檢驗 (無多餘全域狀態機) in general\\Lock.ahk",
+        "Status":  "PASS",
+        "Detail":  "純函式無副作用無全域狀態"
+    },
+    {
+        "Category":  "Permission \u0026 UAC",
+        "TestName":  "EnsureAdmin 函式存在於 basic/Function.ahk",
+        "Status":  "PASS",
+        "Detail":  "basic/Function.ahk 定義 EnsureAdmin()"
+    },
+    {
+        "Category":  "Permission \u0026 UAC",
+        "TestName":  "腳本進入點呼叫 EnsureAdmin() in general\\Abandoned.ahk",
+        "Status":  "PASS",
+        "Detail":  "general\\Abandoned.ahk 頂部自動自檢提權"
+    },
+    {
+        "Category":  "Permission \u0026 UAC",
+        "TestName":  "腳本進入點呼叫 EnsureAdmin() in general\\Lock.ahk",
+        "Status":  "PASS",
+        "Detail":  "general\\Lock.ahk 頂部自動自檢提權"
+    },
+    {
+        "Category":  "Safety \u0026 Guard",
+        "TestName":  "原神專屬安全防護 (提示且不執行任何點擊) in general\\Abandoned.ahk",
+        "Status":  "PASS",
+        "Detail":  "未配置座標提示 ToolTip 且無 LeftClick 動作"
+    },
+    {
+        "Category":  "Safety \u0026 Guard",
+        "TestName":  "原神專屬安全防護 (提示且不執行任何點擊) in general\\Lock.ahk",
+        "Status":  "PASS",
+        "Detail":  "未配置座標提示 ToolTip 且無 LeftClick 動作"
+    },
+    {
+        "Category":  "Deployment Automation",
+        "TestName":  "統一部署腳本 run-ahk-scripts.ps1 規格",
+        "Status":  "PASS",
+        "Detail":  "提權保護: True, 終止舊行程: True, 啟動通用腳本: True"
+    }
+]
