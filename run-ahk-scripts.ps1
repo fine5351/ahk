@@ -11,10 +11,29 @@ Stop-Process -Name "AutoHotkey*" -Force -ErrorAction SilentlyContinue
 
 $ahkExe = "$PSScriptRoot\AutoHotkey\v2\AutoHotkey.exe"
 
-# 啟動通用跨遊戲行為腳本與各項常駐工具腳本
-Start-Process $ahkExe -ArgumentList "$PSScriptRoot\general\Abandoned.ahk" -Verb RunAs
-Start-Process $ahkExe -ArgumentList "$PSScriptRoot\general\Lock.ahk" -Verb RunAs
-Start-Process $ahkExe -ArgumentList "$PSScriptRoot\general\Gacha-2k.ahk" -Verb RunAs
-Start-Process $ahkExe -ArgumentList "$PSScriptRoot\basic\F-AltF.ahk" -Verb RunAs
-Start-Process $ahkExe -ArgumentList "$PSScriptRoot\basic\LeftClick.ahk" -Verb RunAs
-Start-Process $ahkExe -ArgumentList "$PSScriptRoot\chrome\mute-Alt1.ahk" -Verb RunAs
+# 1. 指定欲自動掃描並載入的資料夾清單
+$targetFolders = @(
+    "$PSScriptRoot\general",
+    "$PSScriptRoot\chrome",
+    "$PSScriptRoot\basic"
+)
+
+# 2. 排除純函式庫或非獨立執行的腳本
+$excludeFiles = @(
+    "Function.ahk"
+)
+
+Write-Host "正在掃描並啟動 AutoHotkey 腳本..." -ForegroundColor Cyan
+
+# 3. 動態迴圈遍歷啟動
+foreach ($folder in $targetFolders) {
+    if (Test-Path $folder) {
+        $scripts = Get-ChildItem -Path $folder -Filter "*.ahk" | Where-Object { $excludeFiles -notcontains $_.Name }
+        foreach ($script in $scripts) {
+            Write-Host "  [啟動] $($script.Name)" -ForegroundColor Green
+            Start-Process $ahkExe -ArgumentList "`"$($script.FullName)`"" -Verb RunAs
+        }
+    }
+}
+
+Write-Host "所有指定資料夾內的腳本已成功啟動！" -ForegroundColor Cyan
