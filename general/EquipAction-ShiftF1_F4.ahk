@@ -21,27 +21,64 @@ ExecuteEquipAction(action, *) {
                 return
             }
 
+            ui := DetectHSRUI(res)
+            if (ui == "unknown") {
+                ShowTemporaryTooltip("【星穹鐵道】未偵測到相符的介面（支援：刷本結算、遺器替換）", 1500)
+                return
+            }
+
+            ; 記錄當前鼠標位置
+            MouseGetPos(&mouseX, &mouseY)
+
             BlockInput(true)
             try {
-                if (res == "2k") {
-                    ; 點擊動作 (鎖定 / 棄置)
-                    if (action == "Lock") {
-                        LeftClickAt(618, 472, 150)
-                    } else {
-                        LeftClickAt(611, 543, 150)
-                    }
-                    ; 下一個
-                    LeftClickAt(2152, 722, 150)
-                } else {
-                    ; 點擊動作 (1K)
-                    if (action == "Lock") {
-                        LeftClickAt(459, 354, 150)
-                    } else {
-                        LeftClickAt(456, 407, 150)
-                    }
-                    ; 下一個 (1K)
-                    LeftClickAt(1612, 537, 150)
+                switch ui {
+                    case "Equip":
+                        ; === 遺器替換/裝備模式 ===
+                        if (res == "2k") {
+                            ; 點擊動作 (鎖定 / 棄置)
+                            if (action == "Lock") {
+                                LeftClickAt(2482, 267, 150)
+                            } else {
+                                LeftClickAt(2481, 323, 150)
+                            }
+                        } else { ; 1k
+                            ; 點擊動作 (1K)
+                            if (action == "Lock") {
+                                LeftClickAt(1862, 200, 150)
+                            } else {
+                                LeftClickAt(1861, 242, 150)
+                            }
+                        }
+                        ; 下一個遺器
+                        Sleep(50)
+                        Send("{Right}")
+                        Sleep(100)
+
+                    case "Settle":
+                        ; === 刷本結算模式 ===
+                        if (res == "2k") {
+                            ; 點擊動作 (鎖定 / 棄置)
+                            if (action == "Lock") {
+                                LeftClickAt(618, 472, 150)
+                            } else {
+                                LeftClickAt(611, 543, 150)
+                            }
+                            ; 下一個
+                            LeftClickAt(2152, 722, 150)
+                        } else { ; 1k
+                            ; 點擊動作 (1K)
+                            if (action == "Lock") {
+                                LeftClickAt(459, 354, 150)
+                            } else {
+                                LeftClickAt(456, 407, 150)
+                            }
+                            ; 下一個 (1K)
+                            LeftClickAt(1612, 537, 150)
+                        }
                 }
+                ; 恢復鼠標位置
+                MouseMove(mouseX, mouseY)
             } finally {
                 BlockInput(false)
             }
@@ -159,6 +196,36 @@ ExecuteEquipAction(action, *) {
         case "GenshinImpact":
             ShowTemporaryTooltip("【原神】尚未設定" . actionName . "座標", 1500)
     }
+}
+
+; 星穹鐵道 UI 介面偵測函式 (回傳 "Equip", "Settle", 或 "unknown")
+DetectHSRUI(res) {
+    prevCoord := A_CoordModePixel
+    CoordMode("Pixel", "Client")
+
+    ui := "unknown"
+    try {
+        if (res == "2k") {
+            ; 1. 遺器替換/裝備介面：右側鎖頭白色圓圈 (2482, 252) 或右下強化按鈕 (2450, 1330)
+            if (IsBrightPixel(2482, 252, 200) || IsBrightPixel(2450, 1330, 200)) {
+                ui := "Equip"
+            ; 2. 刷本結算介面：右上「遺器設定」文字 (1720, 60) 或底部按鈕 (950, 1290) 或彈窗箭頭 (2152, 722)
+            } else if (IsBrightPixel(1720, 60, 200) || IsBrightPixel(950, 1290, 200) || IsBrightPixel(2152, 722, 200)) {
+                ui := "Settle"
+            }
+        } else { ; 1k (1920x1080)
+            ; 1. 遺器替換/裝備介面 (1K)
+            if (IsBrightPixel(1862, 189, 200) || IsBrightPixel(1838, 998, 200)) {
+                ui := "Equip"
+            ; 2. 刷本結算介面 (1K)
+            } else if (IsBrightPixel(1290, 45, 200) || IsBrightPixel(713, 968, 200) || IsBrightPixel(1612, 537, 200)) {
+                ui := "Settle"
+            }
+        }
+    } finally {
+        CoordMode("Pixel", prevCoord)
+    }
+    return ui
 }
 
 ; 絕區零 UI 介面偵測函式 (回傳 "Equip", "Tune", "Settle", "Bag", 或 "unknown")
