@@ -127,15 +127,15 @@ ExecuteEquipAction(action, *) {
                         ; === 調律模式 ===
                         if (res == "2k") {
                             if (action == "Lock") {
-                                LeftClickAt(1134, 207, 150)
+                                LeftClickAt(1137, 211, 150)
                             } else {
-                                LeftClickAt(1041, 216, 150)
+                                LeftClickAt(987, 210, 150)
                             }
                         } else { ; 1k
                             if (action == "Lock") {
-                                LeftClickAt(851, 155, 150)
+                                LeftClickAt(853, 158, 150)
                             } else {
-                                LeftClickAt(781, 162, 150)
+                                LeftClickAt(740, 158, 150)
                             }
                         }
                         ; 下一個驅動盤
@@ -239,8 +239,8 @@ DetectZZZUI(res) {
             ; 1. 個人裝備模式：頂部垃圾桶 (1597, 67) 或 R 鍵標籤 (1520, 67)
             if (IsBrightPixel(1597, 67, 200) || IsBrightPixel(1520, 67, 200)) {
                 ui := "Equip"
-            ; 2. 調律模式：鎖頭圖標 (1134, 207) 或「調律獲得」標題 (1270, 170)
-            } else if (IsBrightPixel(1134, 207, 200) || IsGrayText(1270, 170)) {
+            ; 2. 調律模式：鎖頭圖標 (1137, 211)、棄置圖標 (987, 210) 或「調律獲得」標題 (1270, 170)
+            } else if (IsBrightPixel(1137, 211, 200) || IsBrightPixel(987, 210, 200) || IsGrayText(1270, 170)) {
                 ui := "Tune"
             ; 3. 刷本結算模式：彈窗鎖頭 (965, 1153) 或彈窗垃圾桶 (875, 1143)
             } else if (IsBrightPixel(965, 1153, 200) || IsBrightPixel(875, 1143, 200)) {
@@ -253,8 +253,8 @@ DetectZZZUI(res) {
             ; 1. 個人裝備模式 (1K)
             if (IsBrightPixel(1198, 50, 200) || IsBrightPixel(1140, 50, 200)) {
                 ui := "Equip"
-            ; 2. 調律模式 (1K)
-            } else if (IsBrightPixel(851, 155, 200) || IsGrayText(952, 127)) {
+            ; 2. 調律模式 (1K)：鎖頭 (853, 158)、棄置 (740, 158) 或標題 (952, 127)
+            } else if (IsBrightPixel(853, 158, 200) || IsBrightPixel(740, 158, 200) || IsGrayText(952, 127)) {
                 ui := "Tune"
             ; 3. 刷本結算模式 (1K)
             } else if (IsBrightPixel(727, 859, 200) || IsBrightPixel(654, 859, 200)) {

@@ -73,7 +73,20 @@ global GachaProfiles := [
             { name: "跳過動畫1",  x: 2460, y: 70,   wait: 1500 },
             { name: "跳過動畫2",  x: 2460, y: 70,   wait: 3000 }
         ],
-        closeButton: { name: "確認結果", x: 1433, y: 1122, wait: 1000 }
+        closeButton: { name: "確認結果", x: 1433, y: 1122, wait: 1000 },
+        ; 絕區零專屬出金檢測參數 (依據 resources/zzz/角色出金.png 與 resources/zzz/武器出金.png 配置)
+        ; 說明：10 連抽結算畫面中，最高稀有度必固定排在第 1 格 (Row 1, Col 1)
+        goldCheck: {
+            ; 第 1 格 S 級標籤檢測區域 (2K: 2560x1440 基準: X: 390~490, Y: 610~715)
+            sRankArea2K: [390, 610, 490, 715],
+            ; 第 1 格卡片頂部邊框檢測區域 (2K 基準: X: 420~680, Y: 495~505)
+            cardBorderArea2K: [420, 495, 680, 505],
+            ; S 級金色目標色碼 (耀眼亮金、高光金、橙金)
+            targetColors: [0xFFD23C, 0xFFE066, 0xF5A623, 0xFFB800, 0xE5A93C],
+            colorVariation: 25,
+            ; 參考畫面（相對路徑）：resources/zzz/角色出金.png, resources/zzz/武器出金.png
+            referenceImages: ["resources/zzz/角色出金.png", "resources/zzz/武器出金.png"]
+        }
     }
 ]
 
@@ -137,16 +150,20 @@ Esc::
     ratio := GetScaleRatio()
     resText := (ratio == 0.75) ? "1K (縮放 0.75)" : "2K (1.0)"
 
-    ; 即時測試當前畫面是否符合出金條件
-    isGold := CheckIfGoldDetected()
+    currentProfile := GetCurrentProfile()
+    gameName := currentProfile ? currentProfile.name : "未知遊戲"
 
-    statusMsg := isGold ? "【✅ 檢測到五星出金】" : "【❌ 未檢測到五星】"
+    ; 即時測試當前畫面是否符合出金條件
+    isGold := CheckIfGoldDetected(currentProfile)
+
+    statusMsg := isGold ? "【✅ 檢測到出金畫面 (停止條件達成)】" : "【❌ 未檢測到出金畫面】"
     msg := "=== 取色與出金檢測除錯 ===`n"
+        .  "當前目標遊戲: " gameName "`n"
         .  "當前滑鼠座標: X=" mouseX ", Y=" mouseY "`n"
         .  "當前位置色碼: " Format("0x{:06X}", colorHex) "`n"
         .  "當前螢幕解析度: " resText "`n"
-        .  "區域檢測結果: " statusMsg "`n`n"
-        .  "提示：若畫面已有五星但顯示未檢測到，請將上述色碼加入 TargetColors，或調大 ColorVariation！"
+        .  "出金檢測結果: " statusMsg "`n`n"
+        .  "說明：絕區零依據結算畫面第 1 格 S 級角色/武器金色標籤與邊框檢測；原神/星鐵使用全域金色檢測。"
 
     MsgBox(msg, "出金檢測除錯輔助", "T10")
 }
@@ -193,17 +210,39 @@ ExecuteGachaLoop(profile) {
         if (!IsGachaLoopRunning)
             break
 
-        ; 2. 等待結算畫面穩定
-        if (!DelayWithCancelCheck(GoldDetectionConfig.WaitAfterSkipMs))
+        ; 2. 等待結算畫面穩定並動態輪詢檢測出金
+        ;    絕區零出金時會呈現「調頻結果」結算畫面 (角色出金或武器出金)，動態輪詢確保看到畫面才判定
+        isGold := false
+        pollInterval := 200
+        maxWait := (profile.name == "絕區零") ? 3500 : GoldDetectionConfig.WaitAfterSkipMs
+        waited := 0
+        
+        while (waited < maxWait) {
+            if (!IsGachaLoopRunning)
+                break
+            Sleep(pollInterval)
+            waited += pollInterval
+            
+            ; 輪詢檢測是否已出現出金特徵
+            if (CheckIfGoldDetected(profile)) {
+                ; 防抖二次確認 (間隔 150ms 再次檢驗，確保畫面完全載入靜止而非動態閃爍)
+                Sleep(150)
+                if (CheckIfGoldDetected(profile)) {
+                    isGold := true
+                    break
+                }
+            }
+        }
+
+        if (!IsGachaLoopRunning)
             break
 
-        ; 3. 檢測是否出金
-        if (CheckIfGoldDetected()) {
-            ; 觸發出金即停
+        ; 3. 若檢測到出金：停在當前畫面，發出提示聲並終止迴圈
+        if (isGold) {
             SoundBeep(1000, 300)
             Sleep(100)
             SoundBeep(1500, 500)
-            ShowTemporaryTooltip("🎉【" profile.name "】恭喜出金！已自動停止抽卡迴圈。", 5000)
+            ShowTemporaryTooltip("🎉【" profile.name "】恭喜出金！已檢測到出金畫面，停止抽卡迴圈。", 5000)
             IsGachaLoopRunning := false
             break
         }
@@ -238,9 +277,18 @@ PerformGachaSteps(profile) {
 }
 
 ; 檢測結算畫面是否出金 (回傳 true / false)
-CheckIfGoldDetected() {
+CheckIfGoldDetected(profile := "") {
     global GoldDetectionConfig
     
+    if (!profile)
+        profile := GetCurrentProfile()
+
+    ; 針對「絕區零」專屬出金檢測 (依據結算畫面第 1 格 S 級角色/武器金色特徵)
+    if (profile && profile.name == "絕區零" && profile.HasOwnProp("goldCheck")) {
+        return CheckZZZGoldDetected(profile.goldCheck)
+    }
+
+    ; 原神 / 星穹鐵道 通用出金檢測
     ratio := GetScaleRatio()
     sx1 := Round(GoldDetectionConfig.SearchArea2K[1] * ratio)
     sy1 := Round(GoldDetectionConfig.SearchArea2K[2] * ratio)
@@ -261,6 +309,52 @@ CheckIfGoldDetected() {
     for color in GoldDetectionConfig.TargetColors {
         if PixelSearch(&foundX, &foundY, sx1, sy1, sx2, sy2, color, GoldDetectionConfig.ColorVariation) {
             return true
+        }
+    }
+
+    return false
+}
+
+; 絕區零專屬出金檢測：依據調頻結果結算畫面第 1 格 S 級角色/武器特徵
+; 參考圖標注（相對路徑）：resources/zzz/角色出金.png, resources/zzz/武器出金.png
+CheckZZZGoldDetected(goldCheck) {
+    ratio := GetScaleRatio()
+    
+    ; 1. 檢測第 1 格 S RANK 專屬標籤區域 (2K 基準: X: 390~490, Y: 610~715)
+    ;    角色出金與武器出金在此處均呈現大尺寸金黃色「S」字與金色標籤；A 級為紫色「A」，B 級為藍色「B」
+    sx1 := Round(goldCheck.sRankArea2K[1] * ratio)
+    sy1 := Round(goldCheck.sRankArea2K[2] * ratio)
+    sx2 := Round(goldCheck.sRankArea2K[3] * ratio)
+    sy2 := Round(goldCheck.sRankArea2K[4] * ratio)
+
+    for color in goldCheck.targetColors {
+        if PixelSearch(&foundX, &foundY, sx1, sy1, sx2, sy2, color, goldCheck.colorVariation) {
+            foundColor := PixelGetColor(foundX, foundY, "RGB")
+            r := (foundColor >> 16) & 0xFF
+            g := (foundColor >> 8) & 0xFF
+            b := foundColor & 0xFF
+            ; 嚴格金色光譜檢驗：高紅 (R>=170)、高綠 (G>=115)、低藍 (B<=110)，且紅與綠顯著大於藍 (排除紫色與藍色)
+            if (r >= 170 && g >= 115 && b <= 110 && (r - b > 60) && (g - b > 20)) {
+                return true
+            }
+        }
+    }
+
+    ; 2. 輔助檢測：檢測第 1 格頂部金色發光邊框 (2K 基準: X: 420~680, Y: 495~505)
+    bx1 := Round(goldCheck.cardBorderArea2K[1] * ratio)
+    by1 := Round(goldCheck.cardBorderArea2K[2] * ratio)
+    bx2 := Round(goldCheck.cardBorderArea2K[3] * ratio)
+    by2 := Round(goldCheck.cardBorderArea2K[4] * ratio)
+
+    for color in goldCheck.targetColors {
+        if PixelSearch(&foundX, &foundY, bx1, by1, bx2, by2, color, goldCheck.colorVariation) {
+            foundColor := PixelGetColor(foundX, foundY, "RGB")
+            r := (foundColor >> 16) & 0xFF
+            g := (foundColor >> 8) & 0xFF
+            b := foundColor & 0xFF
+            if (r >= 180 && g >= 120 && b <= 100 && (r - b > 70)) {
+                return true
+            }
         }
     }
 
